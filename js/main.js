@@ -2,100 +2,36 @@
  * Created by mbury on 9/30/2014.
  */
 
-function clearVideo() {
-    document.getElementById('video-player').pause();
+require.config({
+    baseUrl : 'js',
+    paths: {
+        "jquery": "https://code.jquery.com/jquery-2.1.1.min",
+        "bootstrap": "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min",
+        "lodash": "http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min",
+        "angularjs": "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min",
+        "playerController": "player-controller",
+        "themeController": "theme-controller"
+    },
+    shim: {
+        "bootstrap": {
+            deps: ["jquery"],
+            exports: "$.fn.popover"
+        },
 
-    _($('#video-player source')).forEach(function(source) {
-        source.removeAttribute('src');
-    });
-
-    document.getElementById('video-player').load();
-}
-
-function loadVideo(streams) {
-    _(streams).forEach(function(stream) {
-        var source = document.getElementById(stream.type + 'src');
-        source.src = stream.url;
-    });
-
-    /*document.getElementById('video-player').load();*/
-}
-
-
-var videoPlayer = angular.module('videoPlayerApp', []);
-
-videoPlayer.controller('PlayerController', function ($scope, $http) {
-
-    $scope.init = function() {
-        $scope.activeVideo = {
-            title: 'Loading...'
-        };
-
-        $scope.themesList = [
-            {
-                name: 'Default',
-                url: ''
-            },
-            {
-                name: 'Broken eyes',
-                url: 'http://code.divshot.com/geo-bootstrap/swatch/bootstrap.min.css'
-            },
-            {
-                name: 'Cyborg',
-                url: 'http://bootswatch.com/2/cyborg/bootstrap.min.css'
-            },
-            {
-                name: 'Super Hero',
-                url: 'http://bootswatch.com/superhero/bootstrap.min.css'
-            }
-        ];
-
-
-        var theme = localStorage.getItem('currentTheme');
-        if (theme) {
-            $('#bootstrap-theme').attr('href', theme);
+        "angularjs": {
+            deps: ["bootstrap"]
+        },
+        "playerController": {
+            deps: ["angularjs"]
+        },
+        "themeController": {
+            deps: ["angularjs"]
         }
-
-        $http({method: 'GET', url: 'data/movies.json'}).
-            success(function(data, status, headers, config) {
-                $scope.data = data;
-                $scope.updateVideo(data[0]);
-            }).
-            error(function(data, status, headers, config) {
-                alert('cant load data');
-                window.location.href = 'error.html';
-            });
-    };
-
-    $scope.updateVideo = function(item) {
-        clearVideo();
-
-        $scope.activeVideo = item;
-        $scope.activeVideo.actorsList = _.map(item.meta.actors, 'name').join(', ');
-
-        loadVideo(item.streams);
-        $scope.isVideoLoad = false;
-    };
-
-    $scope.playVideo = function() {
-        var player = document.getElementById('video-player');
-        if (player.paused) {
-            if (!$scope.isVideoLoad) {
-                player.load();
-                $scope.isVideoLoad = true;
-            }
-            player.play();
-        } else {
-            player.pause();
-        }
-    };
-
-    $scope.updateTheme  = function() {
-       $('#bootstrap-theme').attr('href', $scope.selectedTheme);
-       localStorage.setItem('currentTheme', $scope.selectedTheme);
-    };
+    }
 });
 
-videoPlayer.controller('ErrorController', function($scope) {
+require(['functions', 'jquery', 'bootstrap', 'lodash', 'angularjs', 'playerController', 'themeController'],
+    function(functions, $, bootstrap, _, angularjs, playerController, themeController) {
+        angular.bootstrap(document, ['videoPlayerApp']);
 
 });

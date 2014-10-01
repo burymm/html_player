@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="videoPlayerApp" ng-controller="PlayerController" ng-init="init()">
+<html ng-app="videoPlayerApp">
 <head lang="en">
 
     <meta charset="UTF-8">
@@ -7,20 +7,27 @@
     <title>HTML 5 player</title>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-<!--    <link rel="stylesheet" href="http://code.divshot.com/geo-bootstrap/swatch/bootstrap.min.css"/>-->
     <link rel="stylesheet" href="" id="bootstrap-theme"/>
     <link rel="stylesheet" href="css/main.css"/>
 
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http:////cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
     <script src="js/main.js"></script>
 
+<!--    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+<!--    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>-->
+<!--    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
+
+
+
+   <!-- <script src="js/functions.js"></script>
+    <script src="js/player-controller.js"></script>
+
+    <script src="js/theme-controller.js"></script>-->
 </head>
 <body>
     <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
-        <div class="container">
+        <div class="container" ng-controller="ThemeController" ng-init="themeInit()">
             <div class="nav navbar-nav">
                 <H1>Simple HTML 5 Player</H1>
             </div>
@@ -31,35 +38,37 @@
             </div>
         </div>
     </header>
-    <div class="container-fluid">
-        <div class="content">
-            <div class="player" id="player">
-                <video width="320" height="240" controls class="video-player" id="video-player" poster="" style="  background-image: url({{activeVideo.images.cover}});" ng-click="playVideo()">
-                    <source type="video/mp4" id="mp4src">
-                    <source type="video/ogv" id="ogvsrc">
-                    <source type="video/webm" id="webmsrc">
-                </video>
-            </div>
-            <div class="video-info">
-                <h2 class="movie-name">{{activeVideo.title}}</h2>
-                <p>Actors: {{activeVideo.actorsList}}</p>
-                <p>Directors:
-                    <span ng-repeat="movie_director in activeVideo.meta.directors">{{movie_director.name}}</span>
-                </p>
+    <div class="content-wrapper"  ng-controller="PlayerController" ng-init="playerInit()">
+        <div class="container-fluid">
+            <div class="content">
+                <div class="player" id="player">
+                    <video width="320" height="240" controls class="video-player" id="video-player" poster="" style="{{activeVideo.style}}" ng-click="playVideo($event)">
+                        <source type="video/mp4" id="mp4src">
+                        <source type="video/ogv" id="ogvsrc">
+                        <source type="video/webm" id="webmsrc">
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h2 class="movie-name">{{activeVideo.title}}</h2>
+                    <p>Actors: {{activeVideo.actorsList}}</p>
+                    <p>Directors:
+                        <span ng-repeat="movie_director in activeVideo.meta.directors">{{movie_director.name}}</span>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="content">
-            <ul class="movie-list clearfix">
-                <li class="col-md-3 col-sm-3 col-xs-6 movie-list-item" ng-repeat="item in data">
-                    <a href="#" class="movie-preview clearfix" ng-click="updateVideo(item)">
-                        <img ng-src="{{item.images.cover}}" alt="{{item.title}}"/>
-                        <h3>{{item.title}}</h3>
-                        <p>{{item.meta.releaseYear}}</p>
-                    </a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <div class="content">
+                <ul class="movie-list clearfix">
+                    <li class="col-md-3 col-sm-3 col-xs-6 movie-list-item" ng-repeat="item in data">
+                        <a href="#" class="movie-preview clearfix" ng-class="{active: item.active}" ng-click="updateVideo(item, $index)">
+                            <img ng-src="{{item.images.cover}}" alt="{{item.title}}"/>
+                            <h3>{{item.title}}</h3>
+                            <p>{{item.meta.releaseYear}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>

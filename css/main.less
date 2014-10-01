@@ -1,6 +1,7 @@
 /* variables */
 @base-shadow-color: #aaa;
 @base-shadow-color-hover: #333;
+@base-shadow-color-active: #ccc;
 
 
 /* base and global styles */
@@ -70,7 +71,9 @@
   text-shadow: 1px 1px 1px @base-shadow-color;
 
   img {
+    display: block;
     width: 90%;
+    min-height: 245px;
     border: 1px solid #333;
     -webkit-box-shadow: 3px 3px 3px 0 @base-shadow-color;
     box-shadow: 3px 3px 3px 0 @base-shadow-color;
@@ -85,9 +88,14 @@
       -webkit-box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
       box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
     }
+  }
 
-
-
+  &.active {
+    text-shadow: 2px 2px 2px @base-shadow-color-active;
+    img {
+      -webkit-box-shadow: 0px 0px 4px 4px @base-shadow-color-active;
+      box-shadow: 0px 0px 4px 4px @base-shadow-color-active;
+    }
   }
 }
 

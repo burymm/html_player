@@ -55,7 +55,9 @@
   text-shadow: 1px 1px 1px #aaaaaa;
 }
 .movie-preview img {
+  display: block;
   width: 90%;
+  min-height: 245px;
   border: 1px solid #333;
   -webkit-box-shadow: 3px 3px 3px 0 #aaaaaa;
   box-shadow: 3px 3px 3px 0 #aaaaaa;
@@ -68,6 +70,13 @@
 .movie-preview:hover img {
   -webkit-box-shadow: 3px 3px 3px 0 #333333;
   box-shadow: 3px 3px 3px 0 #333333;
+}
+.movie-preview.active {
+  text-shadow: 2px 2px 2px #cccccc;
+}
+.movie-preview.active img {
+  -webkit-box-shadow: 0px 0px 4px 4px #cccccc;
+  box-shadow: 0px 0px 4px 4px #cccccc;
 }
 .theme-selector {
   margin-top: 20px;
