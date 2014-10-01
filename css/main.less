@@ -1,0 +1,144 @@
+/* variables */
+@base-shadow-color: #aaa;
+@base-shadow-color-hover: #333;
+
+
+/* base and global styles */
+
+.movie-name {
+  margin-top: 5px;
+}
+
+.content {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.player, .video-info {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.player {
+  position: relative;
+}
+
+.spinner-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .spinner {
+    margin: 27% auto;
+  }
+}
+
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  min-height: 378px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  border: 1px solid #000;
+}
+
+.movie-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  .movie-list-item {
+    padding-top: 10px;
+    min-height: 360px;
+    &:hover {
+    }
+  }
+}
+
+.movie-preview {
+  width: 100%;
+  color: #000;
+  text-shadow: 1px 1px 1px @base-shadow-color;
+
+  img {
+    width: 90%;
+    border: 1px solid #333;
+    -webkit-box-shadow: 3px 3px 3px 0 @base-shadow-color;
+    box-shadow: 3px 3px 3px 0 @base-shadow-color;
+  }
+
+  &:hover {
+    color: #000;
+    text-shadow: 1px 1px 1px @base-shadow-color-hover;
+    text-decoration: none;
+
+    img {
+      -webkit-box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
+      box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
+    }
+
+
+
+  }
+}
+
+.theme-selector {
+  margin-top: 20px;
+}
+
+/* devices styles */
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+  }
+
+  .player, .video-info {
+    width: 100%;
+  }
+
+  .movie-list {
+    .movie-list-item {
+      height: 300px;
+      min-height: 300px;
+    }
+  }
+
+  .video-player {
+    min-height: initial;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .movie-list {
+    .movie-list-item {
+      min-height: 435px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movie-list {
+    .movie-list-item {
+      min-height: 335px;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movie-list {
+    .movie-list-item {
+      min-height: 300px;
+    }
+  }
+}
+
