@@ -29,8 +29,9 @@ videoPlayer.controller('ThemeController', function ($scope, $http) {
 
         var theme = localStorage.getItem('currentTheme');
         if (theme) {
-            $('#bootstrap-theme').attr('href', theme);
+            $scope.selectedTheme = theme;
         }
+        $scope.updateTheme();
     };
 
 

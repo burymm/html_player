@@ -1,5 +1,8 @@
 /* variables */
 /* base and global styles */
+*:focus {
+  outline: none !important;
+}
 .movie-name {
   margin-top: 5px;
 }
@@ -68,6 +71,15 @@
   text-decoration: none;
 }
 .movie-preview:hover img {
+  -webkit-box-shadow: 3px 3px 3px 0 #333333;
+  box-shadow: 3px 3px 3px 0 #333333;
+}
+.movie-preview:focus {
+  color: #999;
+  text-shadow: 1px 1px 1px #333333;
+  text-decoration: none;
+}
+.movie-preview:focus img {
   -webkit-box-shadow: 3px 3px 3px 0 #333333;
   box-shadow: 3px 3px 3px 0 #333333;
 }

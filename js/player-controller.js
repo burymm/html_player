@@ -5,6 +5,8 @@
 
 var videoPlayer = videoPlayer || angular.module('videoPlayerApp', []);
 
+videoPlayer.service('myService', function () { /* ... */ });
+
 videoPlayer.controller('PlayerController', function ($scope, $http) {
 
     $scope.playerInit = function() {

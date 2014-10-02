@@ -10,20 +10,8 @@
     <link rel="stylesheet" href="" id="bootstrap-theme"/>
     <link rel="stylesheet" href="css/main.css"/>
 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
+    <script src="js/vendor/require.js"></script>
     <script src="js/main.js"></script>
-
-<!--    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
-<!--    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>-->
-<!--    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>-->
-
-
-
-   <!-- <script src="js/functions.js"></script>
-    <script src="js/player-controller.js"></script>
-
-    <script src="js/theme-controller.js"></script>-->
 </head>
 <body>
     <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -33,7 +21,6 @@
             </div>
             <div class="nav navbar-nav navbar-right">
                 <select class="form-control theme-selector" name="" id="" ng-change="updateTheme()" ng-model="selectedTheme" ng-options="theme.url as theme.name for theme in themesList" >
-                    <option value="" disabled="disabled">Select theme</option>
                 </select>
             </div>
         </div>
@@ -42,7 +29,7 @@
         <div class="container-fluid">
             <div class="content">
                 <div class="player" id="player">
-                    <video width="320" height="240" controls class="video-player" id="video-player" poster="" style="{{activeVideo.style}}" ng-click="playVideo($event)">
+                    <video width="320" height="240" tabindex="0" controls class="video-player" id="video-player" poster="" style="{{activeVideo.style}}" ng-click="playVideo($event)">
                         <source type="video/mp4" id="mp4src">
                         <source type="video/ogv" id="ogvsrc">
                         <source type="video/webm" id="webmsrc">
@@ -61,7 +48,7 @@
             <div class="content">
                 <ul class="movie-list clearfix">
                     <li class="col-md-3 col-sm-3 col-xs-6 movie-list-item" ng-repeat="item in data">
-                        <a href="#" class="movie-preview clearfix" ng-class="{active: item.active}" ng-click="updateVideo(item, $index)">
+                        <a href="#" class="movie-preview clearfix" tabindex="{{$index + 1}}" ng-class="{active: item.active}" ng-click="updateVideo(item, $index)">
                             <img ng-src="{{item.images.cover}}" alt="{{item.title}}"/>
                             <h3>{{item.title}}</h3>
                             <p>{{item.meta.releaseYear}}</p>

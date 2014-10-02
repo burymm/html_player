@@ -2,9 +2,14 @@
 @base-shadow-color: #aaa;
 @base-shadow-color-hover: #333;
 @base-shadow-color-active: #ccc;
+@base-shadow-color-focused: #ccc;
 
 
 /* base and global styles */
+
+*:focus {
+  outline: none !important;
+}
 
 .movie-name {
   margin-top: 5px;
@@ -81,6 +86,17 @@
 
   &:hover {
     color: #000;
+    text-shadow: 1px 1px 1px @base-shadow-color-hover;
+    text-decoration: none;
+
+    img {
+      -webkit-box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
+      box-shadow: 3px 3px 3px 0 @base-shadow-color-hover;
+    }
+  }
+
+  &:focus {
+    color: #999;
     text-shadow: 1px 1px 1px @base-shadow-color-hover;
     text-decoration: none;
 
