@@ -15,14 +15,25 @@ videoPlayer.controller('ThemeController', ['$scope', 'DataFactory', function ($s
                 if (theme) {
                     $scope.selectedTheme = theme;
                 }
-                $scope.updateTheme();
-        });
+                return $scope.updateTheme();
+        }).
+        error(function(data) {
+                return false;
+            });
+        return null;
     };
 
     $scope.updateTheme  = function() {
-        /* load css file with theme */
-        $('#bootstrap-theme').attr('href', $scope.selectedTheme);
-        /* save theme in LS */
-        localStorage.setItem('currentTheme', $scope.selectedTheme);
+        try {
+            /* load css file with theme */
+            $('#bootstrap-theme').attr('href', $scope.selectedTheme);
+            /* save theme in LS */
+            localStorage.setItem('currentTheme', $scope.selectedTheme);
+            return true;
+        }
+        catch(exeption) {
+            return false;
+        }
+
     };
 }]);
