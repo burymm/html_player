@@ -9,8 +9,10 @@ require.config({
         "bootstrap": ["http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min", "vendor/bootstrap.min"],
         "lodash": ["http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min", "vendor/lodash.min"],
         "angularjs": ["http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min", "vendor/angular.min"],
-        "playerController": "player-controller",
-        "themeController": "theme-controller"
+        "services": "services",
+        "playerController": "controllers/player-controller",
+        "themeController": "controllers/theme-controller",
+        "footerController": "controllers/footer-cotroller"
     },
     shim: {
         "bootstrap": {
@@ -21,16 +23,22 @@ require.config({
         "angularjs": {
             deps: ["bootstrap"]
         },
+        "services": {
+            deps: ["angularjs"]
+        },
         "playerController": {
-            deps: ["angularjs", "services"]
+            deps: ["services"]
         },
         "themeController": {
+            deps: ["services"]
+        },
+        "footerController": {
             deps: ["angularjs"]
         }
     }
 });
 
-require(['functions', 'jquery', 'bootstrap', 'lodash', 'angularjs', 'playerController', 'themeController'],
-    function(functions, $, bootstrap, _, angularjs, playerController, themeController) {
+require(['functions', 'jquery', 'bootstrap', 'lodash', 'angularjs', 'services', 'playerController', 'themeController', 'footerController'],
+    function(functions, $, bootstrap, _, angularjs, services, playerController, themeController, footerController) {
 
 });
