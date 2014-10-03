@@ -7,11 +7,18 @@
 * stop playing video and remove all links from video player
 * */
 function clearVideo() {
-    document.getElementById('video-player').pause();
-    _($('#video-player source')).forEach(function(source) {
-        source.removeAttribute('src');
-    });
-    document.getElementById('video-player').load(); // unload video from player
+    try {
+        document.getElementById('video-player').pause();
+        _($('#video-player source')).forEach(function (source) {
+            source.removeAttribute('src');
+        });
+        document.getElementById('video-player').load(); // unload video from player
+        return true;
+    } catch (exception) {
+        throw '[ClearVideo] Can not clear video. Exception: ' + exception;
+        return false;
+    }
+
 }
 
 /*
